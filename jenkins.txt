@@ -1,0 +1,266 @@
+Jenkins :- Jenkins is a java application. it is platform independent.
+
+---> jenkins is used for continuous integration and continuous delivery
+
+---> Jenkins is open source and written in java that runs on windows,linux and mac.
+
+
+---> Continous Integration = Continous Build + Continous Testify
+
+---> Pipeline ---> Pipeline is nothing but step by step execution of a process.
+
+---> Jenkins is a heart of the devops. Because it combines the both Dev team and Ops team.
+
+
+
+---> Plugin :- Plugin is nothing but a small software which automates your work.
+
+
+---> Whenever developers write a code, we integrate all the code of all developers at anypoint of time and we build,test and delivery/deploy to client. This is called CI/CD.
+
+
+jenkins password - 2e34511e605944f6910d8d3538da0262
+jenkins URL - http://localhost:8080/
+
+
+
+Setting up Jenkins on Tomcat :-
+-----------------------------
+
+---> Requriements :- We should have tomcat5 or above.
+
+---> Java 7 or above will be installed in your system.
+
+Steps :- 
+
+S-1. Download the tomcat.
+
+---> To do that search tomcat and goto downloads and select tomcat 8 in that select zip file.
+
+S-2. Unzip that downloaded file, And place that file on any location.
+
+S-3. Copy and paste the jenkins.war file inside tomcap/webapps folder.
+
+S-4. Goto cmd and enter into tomcat/bin directory.
+
+---> cd downloads/tomcat/tomcat/bin ---> To enter into tomcat/bin directory.
+
+---> In that folder we have .sh files.
+
+----> All the .sh files are executable.
+
+---> Make all sh file executable ---> To do that we use this command 
+
+---> chmod +x *.sh ---> (chmod ---> We use this for Giving permissions) (+x ---> It is for making it executable) (* ---> All files) (*.sh ---> All files with .sh extention)
+
+
+S-5 . Start the tomcat server.
+
+---> To start tomcat server we use this command.
+
+Eg :- ./startup.sh  ---> (./ ---> If we already in bin folder then we use dot(.))  (startup  ---> This is the command to start the tomcat server) (.sh ---> File name)
+
+---> Make sure that when we use this command we should in tomcat/bin folder. Otherwise we can describe bin in command.
+
+Eg :- bin/startup.sh
+
+---> If we want to shutdown tomcat server then we use this command.
+
+---> ./shutdown.sh
+
+
+S-6. Verify if Tomcat started or not.
+
+---> To do that we have go to browser and enter localhost:8080
+
+
+---> localhost:8080 is an default server.
+
+
+ 
+S-7. Verify if jenkins is running on tomcat
+
+---> If we want to see the jenkins in tomcat server than we have to describe this.
+
+---> localhost:8080/jenkins
+
+
+Note :- Jenkins is stand alone application. Its default port is 8080. if you want to start jenkins on different port we use this command.
+
+Eg:- java -jar jenkins.war --httpPort=9090. (After http the (P) should be caps,otherwise it won't execute).
+
+
+
+How to change home directory of jenkins :-
+------------------------------------------
+
+---> Home directory of a jenkins is whenever we delpoyed jenkins on any system there is a folder where which is created by default and most of the times the name of the folder is (.)Dot jenkins and default location will be the user profile of the system and this folder contains all information about logs,configuration,jobs Etc.
+
+
+---> jenkins home directory contains :-
+
+1. All configurations
+2. Plugins
+3. Job details
+4. Logs
+
+Qus. Why do we want to change the jenkins home directory?
+
+Ans. To move jenkins home directory to a location that has enough disk space.
+
+---> Project requriements.
+
+Step For this process :-
+------------------------
+
+S-1. Check your current jenkins home directory.
+
+---> Start the jenkins and login in server.
+---> After logging in select manage jenkins option.Inside manage jenkins the very first option is configure system.
+Open that and we see the Home directory location
+
+
+S-2. Create a new folder (Which will be a new home directory)
+
+---> Goto another drive and create a folder with any nme.
+
+
+S-3. Copy all data from old directory to new directory.
+
+S-4. Change the environment variable.
+
+---> Goto evn variables ---> System variables ---> Select NEW option.
+
+---> New system variable option will pops up and gives the name and location of folder that we newly created.
+
+
+S-5. We have to restart the jenkins.
+
+---> After restarting the jenkins the location is changed.
+
+---> To check that we go to manage jenkins ---> configure system and we see the change in top of the window.
+
+
+Note :- 
+-------
+1. To restart the jenkins on server.
+
+Eg:- localhost:8080/restart
+
+2. To Know the system information
+
+Eg:- localhost:8080/systemInfo
+
+* While use this address on server the I should be in uppercase. (systemInfo).
+
+
+How to use Command Line Interface on Jenkins :-
+-----------------------------------------------
+
+Reason for using the Command line :-
+------------------------------------
+
+1. It's easier to use.
+2. It is faster and more convinent.
+3. Good memory management.
+4. Continuous integration is done on cli.
+
+Steps :-
+--------
+
+S-1. Start Jenkins.
+
+S-2. Goto manage jenkins ---> Configure global security ---> Select the enable security option(Tick).
+
+---> After ticking that option we have to save the changes.
+
+
+S-3. Goto ---> http://localhost:8080/cli/
+
+---> http://localhost:8080/cli/ ---> This address show the all possible command to do on CLI.
+
+
+S-4. Download the jenkins-cli.jar file and place that on any location.
+
+S-5. Now test the jenkins command line is working or not.
+
+---> To do that open a new terminal and goto that file location and run this command ---> java -jar jenkins-cli.jar -s http://localhost:8080/ ---> This command will present at top of the jenkins cli.
+
+---> After runing this command in terminal, It asks for ssh/id. If we dont know where that shh id, just goto your profile ---> Configure ---> SSH Public keys.
+
+---> At SSH Public keys we have to give somevalues and save that. (Somevalues - pc.19).
+
+
+How to create users + Manage + Assign Roles :-
+----------------------------------------------
+
+1. Creating a new users :- Start the jenkins. goto manage jenkins ---> manage users ---> Create user.
+
+2. Configure Users :- On the top right side you have your profile go to that ---> configure.
+
+---> There we cam configure name, description, email,password,ssh public keys Etc.
+
+3. Create and manage user roles :- To do this we need a plugin called roles strategy.
+
+---> To get that plugin we have to ways :-
+
+First way :- Goto browser ---> type (jenkins role strategy plugin) in url ---> Download the file(This file is downloaded in .hpi Format.)
+
+---> Copy that downloaded file and paste it in your jenkins Home directory(.jenkins) ---> Plugins (Paste it in Plugins directory)
+
+---> Now restart the jenkins.
+
+Second way :- Start jenkins ---> Manage jenkins ---> Manage plugins ---> Select available option and search for that plugin in search box. And download that.
+
+---> Restart the jenkins.
+
+4. After restarting the jenkins, Goto manage jenkins ---> configure global security ---> Authorization.
+
+---> In authorization window we find role based strategy option Select that. (This option will only come after plugin is installed and jenkins is restart)
+
+
+---> Now goto manage jenkins ---> manage and assign roles(This option will appear only after enabling the role based strategy option inside authorization)
+
+---> After geting entered into manage and assign roles option we find there option.
+
+1. Manage Roles
+2. Assign Roles
+3. Role strategy macros
+
+
+---> Inside the Manage role we have three more options.
+
+1. Global Roles :- It provides the authorization and access on a global level.
+
+---> It displays this option (role to add) ---> we have to describe name of user.
+
+2. Project/item Roles :- We can create roles in specific to a project.
+
+---> It displays the same option here like above (Role to add) ---> Here we describe the role of that employee.
+
+Eg :- Role to add - Developer
+	 Role to add - Tester
+
+---> And there is one more option here (Pattern) ---> Here we have to specific the what the employee works on.
+
+Eg :- Pattern - Dev.* (If the emloyee is developer than he can have access to all dev patterend files.)
+	 pattern - test.* (If the emloyee is tester than he can have access to all test patterend files.)
+
+3. Node Roles - Node roles is also know as slave.
+
+
+---> Inside the assign Roles We have three options.
+
+1. Global Roles :- Here we have this (user/group to add) option. In this we have to add and specify the employee name to give the rights to access.
+
+2. Project/Item Roles :- Here we have this (user/group to add) option. In this we have to give rights to employee based on his work. if he is developer than give developer rights.
+
+3. Node Roles :- Node role is also know as slave.
+
+
+
+
+
+
+
+
