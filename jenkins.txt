@@ -41,7 +41,7 @@ S-2. Unzip that downloaded file, And place that file on any location.
 
 S-3. Copy and paste the jenkins.war file inside tomcap/webapps folder.
 
-S-4. Goto cmd and enter into tomcat/bin directory.
+S-4. Goto cmd and enter into tomcat/bin directory location.
 
 ---> cd downloads/tomcat/tomcat/bin ---> To enter into tomcat/bin directory.
 
@@ -122,7 +122,7 @@ Open that and we see the Home directory location
 
 S-2. Create a new folder (Which will be a new home directory)
 
----> Goto another drive and create a folder with any nme.
+---> Goto another drive and create a folder with any name.
 
 
 S-3. Copy all data from old directory to new directory.
@@ -258,9 +258,255 @@ Eg :- Pattern - Dev.* (If the emloyee is developer than he can have access to al
 3. Node Roles :- Node role is also know as slave.
 
 
+Jenkins Basic configuration :-
+-----------------------------
+
+1. To display the system message.
+
+---> System message is nothing but displaying the message on top of the Dashboard.
+
+---> The message has two formats.
+1. Plain Text ---> It is default.
+2. HTML ---> we have enable this option.
+
+---> To enable that option ---> Manage jenkins ---> Configure global security ---> Markup Formatter ---> Here we change the option and save.
+
+---> Manage jenkins ---> Configure System ---> System message.
 
 
 
+2. Quiet Period :- It is a period that number of seconds that this particular jenkins instance should wait before triggering a job.
 
 
+Creating JOBS in Jenkins :-
+---------------------------
+
+1. Start jenkins ---> new item ---> Enter item name and select project type and press OK ---> Add Details.
+
+---> Enter into that project ---> build now. And you can view your build history on the left side.
+
+
+2. How to trigger the job remotely :-
+
+---> Goto to the project ---> Goto configure ---> Build triggers ---> Enable trigger builds remotely.
+
+---> After enabling that it gives the link, copy that link and paste it in new window.
+
+
+---> JENKINS_URL/job/demo/build?token=TOKEN_NAME or /buildWithParameters?token=TOKEN_NAME
+
+---> JENKINS_URL ---> here we have to give your systems ip address or localhost.
+
+---> TOKEN_NAME ---> Here we have to give the token name.
+
+---> Eg :-  localhost:8080/job/demo/build?token=TOKEN_NAME or /buildWithParameters?token=1919
+
+
+3. How to chain job executions :-
+
+
+---> If we have a multiple projects and we want to excute(Run Jobs) them on automatically one by one.
+
+Steps :-
+-------
+
+S-1. Start jenkins ---> Create multiple Projects.
+
+Eg:- If we create 3 projects demo1,demo2,demo3. Enter into demo 2 and cofigure.
+
+S-2 . Demo2 ---> Configure ---> Build Triggers ---> enable Build after other projects are built.
+
+---> After enabling that specify the projects to build first.
+
+S-3. Goto build and select command line ---> give the command 
+
+S-4. Post build actions ---> specify the project name and save.
+
+S-5 . Goto dashboard and build the first project. the mentioned projects will build automatically one after another.
+
+
+
+Jenkins Integration with GIT (SCM) :-
+------------------------------------
+
+1. Create a java program and run it through command line.
+
+2. Create a jenkins job to run the java program.
+
+3. Add this program/project to GIT.
+
+4. Jenkins - Add git plugin
+
+5. Configure jenkins job to trigger the execution when a change is pusged to GITHUB.
+
+Steps :-
+--------
+
+S-1 . Create any language file, place that on any location.
+
+---> Run that on cmd. If we write java file than run and execute that file.
+
+Syntax :- Javac filename with extention
+eg :- javac hello.java
+
+syntax :- Javac filename
+Eg :- java hello
+
+---> If execution is done then start jenkins and create a job.
+
+
+S-2 . Create a jenkins job to run the program.
+
+
+---> Start jenkins ---> Create New item
+
+---> After creating the new item goto build section and give the commands to execute that file.
+
+Eg :- C:\Users\admin.EXEL\Desktop\project  ---> First specify the location.
+
+---> javac hello.java
+---> java hello ---> To execute java file give these commands.
+
+---> After configuring the project now build that.
+
+S-3 . Add the project to Git and GitHub.
+
+---> After the step three goto jenkins and check for git plugin.
+
+---> Start jenkins ---> Manage jenkins ---> manage plugins ---> From there we have to download the plugin.
+
+
+S-4 . Configure the jenkins job
+
+---> Open the created project (Hello)---> (project name is hello) ---> configure ---> Source code management.
+
+---> In SCM Section, After installing the GIT plugin now we see the Git option there.
+
+---> Enable that Git option.
+
+---> Give the URL of your remote repository.
+
+---> Now goto Build Triggers Section and enable the Poll SCM option and give the cron expression there. Because how often and what intervals you want this particular job to check the source code repository to check for the changes.
+
+---> Cron expression :- * * * * * ---> This five stars idicates check for every minute. And there are many cron expressions.
+
+Note :- While using this expression we should give space to each star.
+
+S-5 . To see its integrated or not, Create new files in your working directory and add those file to remote repository.
+Then goto project and see build history.
+
+
+Adding GitHub credentials in jenkins :-
+---------------------------------------
+
+---> To add the credentials first we have the credentials plugin.
+
+---> Start jenkins ---> Manage jenkins ---> Manage plugins ---> Download the credentials plugin
+
+---> Start jenkins ---> Manage jenkins ---> Manage credentials ---> Add the credentials. (While adding Git Credentials there is a option called "ID" in the we won't specify anything.)
+
+---> After adding the credentials now goto new item and create a project.
+
+---> New Item ---> Source code management ---> Enable the Git option.
+
+---> Add the GitHub URL there and add credentials. Now it will save in .jenkins ---> Jobs.
+
+---> If you don't want to save in default location, Then goto General ---> Advanced ---> enable the option use custom workspace (In that we have to specify the path for your working directory). 
+
+
+How to use catlight on jenkins :- It is a monitoring tool for jenkins.
+---------------------------------
+
+---> catlight is a status notifier for the developer.
+
+---> Catlight will monitor all the jobs on your jenkins and whenever there is any status change or anything that needs your attention it will pop up on your desktop and you will get notified of all the changes.
+
+---> Catlight will notify you when builds,bugs and tasks need your attention.
+
+---> We can choose things to track and see the status in  tray.
+
+
+Download process :- Goto downloads select the OS based on your requirement.
+
+---> After download just open that file and run.
+
+---> It asks us which project will i monitor,you can select all or required project.
+
+
+
+Automated Deployment :-
+-----------------------
+
+---> Main stages in continuous delivery and deployment pipeline of a software.
+
+---> BUILD ---> DEPLOY ---> TEST ---> RELEASE
+
+
+---> Automated deployment is the process of automating the deployment process in a continuous delivery system.
+
+
+Steps:-
+-------
+
+S-1 . Start the jenkins.
+
+S-2 . Install the deploy plugin.(Deploy to container plugin)
+
+---> Restart the jenkins.
+
+S-3 . Create a build job in jenkins.
+
+---> Before creating the build job we should have war/ear file present in your system. for now we downloading the sample war file.
+
+---> Start jenkins ---> New item ---> Build (Give sample command like date.)
+
+S-4 . Add post-build action Deploy war/ear to container (Add values to the fileds.)
+
+---> start jenkins ---> new item --- Build ---> Post-build actions ---> Select Deploy war/ear to a container.
+
+
+---> In post build actions fill the fileds.
+
+---> In context path we specify war file location.(We have copy the war file to jenkins workspace. The workspace is available in .jenkins directory.)
+
+---> Now add the container, There are many containers you can add based on your requirement. For now we add tomcat 7. 
+
+
+S-5 . In Tomcat-users.xml file add user for deployment.
+
+---> Before this step we have to install the tomcat in you system.
+
+---> config the username and password on tamcat users.xml file.
+
+---> After configuring the tomcat, Start the tomcat and run.
+
+
+S-6 . Run and Validate
+
+---> Before that add the username and password in jenkins 
+
+---> Build the job and deployment will be done.
+
+
+Note :- If jenkins and tomcat are running on the same system, ensure to use different ports.
+
+
+How to send email from jenkins :-
+---------------------------------
+
+---> Start jenkins ---> Manage jenkins ---> configure system ---> Email notifications
+
+---> We have to describe SMTP server. The SMTP server for gmail is smtp.gmail.com. (If we use any other emails we can find your smtp server on internet.)
+
+---> Now go to advanced section ---> Enable the SMTP Authentication.
+
+---> In SMTP Authentication file the fields.
+
+---> Select the SSL option. (Incase of we use Gmail)
+
+---> SMTP port ---> Most probably these are the gmail ports 465,587,25.
+
+---> Enable the test configuration by sending test email.(For testing purpose only we tick this option)
+
+---> Give the emailid and press test configuration button.
 
