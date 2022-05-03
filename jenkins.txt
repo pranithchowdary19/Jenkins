@@ -448,19 +448,19 @@ Automated Deployment :-
 Steps:-
 -------
 
-S-1 . Start the jenkins.
+S-1. Start the jenkins.
 
-S-2 . Install the deploy plugin.(Deploy to container plugin)
+S-2. Install the deploy plugin.(Deploy to container plugin)
 
 ---> Restart the jenkins.
 
-S-3 . Create a build job in jenkins.
+S-3. Create a build job in jenkins.
 
 ---> Before creating the build job we should have war/ear file present in your system. for now we downloading the sample war file.
 
 ---> Start jenkins ---> New item ---> Build (Give sample command like date.)
 
-S-4 . Add post-build action Deploy war/ear to container (Add values to the fileds.)
+S-4. Add post-build action Deploy war/ear to container (Add values to the fileds.)
 
 ---> start jenkins ---> new item --- Build ---> Post-build actions ---> Select Deploy war/ear to a container.
 
@@ -472,7 +472,7 @@ S-4 . Add post-build action Deploy war/ear to container (Add values to the filed
 ---> Now add the container, There are many containers you can add based on your requirement. For now we add tomcat 7. 
 
 
-S-5 . In Tomcat-users.xml file add user for deployment.
+S-5. In Tomcat-users.xml file add user for deployment.
 
 ---> Before this step we have to install the tomcat in you system.
 
@@ -481,7 +481,7 @@ S-5 . In Tomcat-users.xml file add user for deployment.
 ---> After configuring the tomcat, Start the tomcat and run.
 
 
-S-6 . Run and Validate
+S-6. Run and Validate
 
 ---> Before that add the username and password in jenkins 
 
@@ -510,3 +510,131 @@ How to send email from jenkins :-
 
 ---> Give the emailid and press test configuration button.
 
+
+Pipeline in jenkins :-
+---------------------
+
+---> Pipeline is a workflow with group of events or jobs that are chained and intergrated with each other in sequence.
+
+---> Every job in a pipeline has some dependency on one or more other jobs.
+
+
+Setting up continuous delivery pipeline :-
+------------------------------------------
+
+Steps :-
+-------
+
+S-1. Chain requried jobs in sequence (Add upstream/downstream jobs)
+
+---> first we have to create a sample jobs like, build job,deploy job and test job.
+
+---> In every job goto build ---> add build step ---> Execute shell ---> Enter executable commands.
+
+---> Executable commands ---> date, echo "This test job is successful"
+
+---> Chain these three jobs.
+
+---> goto secondly created job. in this case deploy job is created secondly ---> configure ---> build triggers ---> build after other projects are built ---> specify the first project name.(In this case first project is build job.)
+
+---> goto to third project.(In this case test is created third.) ---> configure ---> build triggers ---> build after other projects are built ---> specify the second project name.(In this case second project is deploy job.)
+
+S-2. Install the delivery pipeline plugin.
+
+---> Start jenkins ---> Manage jenkins ---> Manage plugins ---> goto available section and search for delivery pipeline plugin and install and restart jenkins.
+
+S-3. Add delivery pipeline view. (Configure the view)
+
+---> Goto the dashboard and you see the Plus(+) icon on top press that give the name and select delivery pipeline view option.
+
+---> (+)Plus symbol is for view.
+
+---> After adding, now we discuss above few useful options.
+
+1. Enable start of new pipeline build ---> This will create a run button in pipeline view and it build the new pipeline.
+
+2. Enable rebuild ---> This will create a rebuild button on jobs. To run a particular job in the same pipeline we can use this option
+
+3. Show total build time ---> This will show the how much time it take to a build your jobs.
+
+
+Note :- BUild triggers is not applicable for the first jobs.
+
+
+
+Setting up build pipeline :-
+-----------------------------
+
+Steps :-
+-------
+
+S-1. Chain requried jobs in sequence (Add upstream/downstream jobs)
+
+S-2. Install Build pipeline plugin.
+
+---> Start jenkins ---> Manage jenkins ---> Manage plugins ---> goto available section and search for Build pipeline plugin and install and restart jenkins.
+
+S-3. Add Build pipeline view. (Configure the view)
+
+---> Goto the dashboard and you see the Plus(+) icon on top press that give the name and select Build pipeline view option.
+
+
+Blue ocean in Jenkins :-
+------------------------
+
+---> A blue ocean is new user experience for jenkins. Which is designed to reduces the clutter and increases the clarity.
+
+---> To use blue ocean,ensure that you have jenkins 2.7 or above version.
+
+Steps :-
+--------
+
+S-1. Install the blue ocean plugin.
+
+---> Start jenkins ---> Manage jenkins ---> Manage plugins ---> goto available section and search for Blue ocean plugin and install and restart jenkins.
+
+S-2. Switch to blue ocean view. It appears in leftside.
+
+---> It provides very interactive UI.
+
+
+How to trigger a job with Email :-
+---------------------------------
+
+Steps :-
+--------
+S-1. Start jenkins
+
+S-2. Install the Poll mailbox trigger plugin
+
+---> Start Jenkins ---> Manage jenkins ---> Manage plugins ---> Goto available section and install the plugin.
+
+---> After installing the plugin, create the new job.
+
+---> New Job ---> Configure ---> Build triggers ---> Tick the poll mailbox trigger option.
+
+---> After ticking that option give the email and password.
+
+---> Select the advanced option ---> Advanced email option(Give the expression), Schedule(Give the cron expression)
+
+---> Goto email and send the mail to yourself with the subject that we specified in jenkins. and goto jenkins and run test connection again.
+
+---> Goto build and execute the command based on requriement.
+
+---> Run the job and see the output in console.
+
+
+Build Monitor View :-
+----------------------
+---> Build monitor plugin provides a highly visible view of the status of selected jenkins jobs.
+
+Steps :-
+--------
+
+---> Start Jenkins ---> Manage jenkins ---> Manage plugins ---> goto available section ---> download build monitor view plugin.
+
+---> After installing the pluging,goto dashboard ---> View ---> enable build monitor view.
+
+---> After enabling that option it will takes you to configuration screen in that, goto Job filters ---> select the required jobs.
+
+---> After that select required option and press apply and save. it will takes you to build monitor view. It shows your jobs.
