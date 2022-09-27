@@ -24,8 +24,10 @@ jenkins URL - http://localhost:8080/
 
 
 
-Setting up Jenkins on Tomcat :-
+Setting up Jenkins on Tomcat :- There are two ways.
 -----------------------------
+1. In Linux ---> This describes here.
+2. In Windows
 
 ---> Requriements :- We should have tomcat5 or above.
 
@@ -39,7 +41,7 @@ S-1. Download the tomcat.
 
 S-2. Unzip that downloaded file, And place that file on any location.
 
-S-3. Copy and paste the jenkins.war file inside tomcap/webapps folder.
+S-3. Copy and paste the jenkins.war file inside tomcat/webapps folder.
 
 S-4. Goto cmd and enter into tomcat/bin directory location.
 
@@ -88,6 +90,57 @@ S-7. Verify if jenkins is running on tomcat
 Note :- Jenkins is stand alone application. Its default port is 8080. if you want to start jenkins on different port we use this command.
 
 Eg:- java -jar jenkins.war --httpPort=9090. (After http the (P) should be caps,otherwise it won't execute).
+
+
+Setting up Jenkins on Tomcat :- There are two ways.
+-----------------------------
+1. In Linux 
+2. In Windows ---> This describes here.
+
+---> Requriements :- We should have tomcat5 or above.
+
+---> Java 7 or above will be installed in your system.
+
+Steps :- 
+
+S-1. Download the tomcat.
+
+---> To do that search tomcat and goto downloads and select tomcat 8 in that select zip file.
+
+S-2. Unzip that downloaded file, And place that file on any location.
+
+S-3. Copy and paste the jenkins.war file inside tomcat/webapps folder.
+
+S-4 From step 3 come back from webapps and enter into conf folder to configure the port.
+ 
+---> We need to change the port. Because jenkins and tomcat default ports are same.(localhost:8080).
+
+---> To change the tomcat port goto conf folder on tomcat.Open conf and there we find server.xml file. Open the server.xml file in notepad and find for this line. 
+		
+		Connector port="8080" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" />
+
+And change the port 8080 to anything we require. for example i use 1010.
+
+
+		Connector port="1010" protocol="HTTP/1.1"
+               connectionTimeout="20000"
+               redirectPort="8443" />
+
+S-5 . Start the tomcat server.
+
+---> To start tomcat server goto bin directory and find for startup.bat file. Double click that file and it redirects to cmd and start the tom cat server.
+
+Note:- FileName(.bat) ---> This type of file is for windows.
+--->  FileName (.Sh) ---> This type of file is for shell scripting(linux).
+
+---> If we want to shutdown tomcat server then we use to double click on shutdown.bat file.
+
+
+S-6. Verify if Tomcat started or not.
+
+---> To do that we have go to browser and enter the configured port id. localhost:1010
 
 
 
